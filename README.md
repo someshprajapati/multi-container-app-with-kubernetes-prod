@@ -1,6 +1,6 @@
 # Multi Container App Deployment on Google Kubernetes Engine (GKE) for Production Environment
 
-#### Preparing the app for the GKE 
+### Preparing the app for the GKE 
 S😎MESH~[multi-container-app-with-kubernetes-production (master)]-$ **ls -l**
 ```
 -rw-r--r--   1 someshprajapati  staff  13562 Jul 13 20:52 README.md
@@ -11,7 +11,7 @@ drwxr-xr-x@  8 someshprajapati  staff    256 Jul 13 20:52 worker
 ```
 
 ### Running the ruby container on Mac for Travis configuration
-##### Using container to avoid the ruby install on Mac
+##### Note: Using container to avoid the ruby install on Mac
 S😎MESH~[multi-container-app-with-kubernetes-production (master)]-$ **docker run -it -v $(pwd):/app ruby:2.4 sh**
 ```
 Unable to find image 'ruby:2.4' locally
@@ -53,12 +53,14 @@ Password for someshprajapati: ************
 Successfully logged in as someshprajapati!
 ```
 
+**# pwd**
+```
+/
+```
+
 **# ls**
 ```
 app  bin  boot	dev  etc  home	lib  lib64  media  mnt	opt  proc  root  run  sbin  srv  sys  tmp  usr	var
-
-# pwd
-/
 ```
 
 **# cd /app**
@@ -93,14 +95,14 @@ README.md  client  k8s	server	service-account.json  service-account.json.enc	wor
 **# exit**
 
 
-## On Google Cloud Terminal we are installing the `helm` to follow the below steps:
+### On Google Cloud Terminal we are installing the `helm` to follow the below steps:
 
 soprajap@cloudshell:~ (multi-kubernetes-production)$ **kubectl create secret generic pgpassword --from-literal PGPASSWORD=test123**
 ```                                                          
 secret/pgpassword created
 ```
 
-## Steps to install Helm on Google project
+## Steps to install `helm` on Google Cloud Project
 
 This note is if you wish to use the latest version of Helm, which is now v3. This is a major update, as it removes the use of Tiller.
 
@@ -124,7 +126,7 @@ In your Google Cloud Console run the following:
 Link to the docs: https://kubernetes.github.io/ingress-nginx/deploy/#using-helm
 
 
-## Now we are installing the `helm` on Google Cloud Terminal
+### Now we are installing the `helm` on Google Cloud Terminal
 soprajap@cloudshell:~ (multi-kubernetes-production)$ **curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3**
 soprajap@cloudshell:~ (multi-kubernetes-production)$ **chmod 700 get_helm.sh**
 soprajap@cloudshell:~ (multi-kubernetes-production)$ **./get_helm.sh**
@@ -135,7 +137,7 @@ Preparing to install helm into /usr/local/bin
 helm installed into /usr/local/bin/helm
 ```
 
-## Get the namespaces on Google Cloud Terminal
+### Get the namespaces on Google Cloud Terminal
 soprajap@cloudshell:~ (multi-kubernetes-production)$ **kubectl get namespaces**
 NAME              STATUS   AGE
 default           Active   166m
@@ -143,13 +145,13 @@ kube-node-lease   Active   166m
 kube-public       Active   166m
 kube-system       Active   166m
 
-## Create the service account for `tiller` under namespace `kube-system` on Google Cloud Terminal
+### Create the service account for `tiller` under namespace `kube-system` on Google Cloud Terminal
 soprajap@cloudshell:~ (multi-kubernetes-production)$ **kubectl create serviceaccount --namespace kube-system tiller**
 ```
 serviceaccount/tiller created
 ```
 
-## Create the cluster-admin role for `tiller`
+### Create the cluster-admin role for `tiller`
 soprajap@cloudshell:~ (multi-kubernetes-production)$ **kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller**
 ```
 clusterrolebinding.rbac.authorization.k8s.io/tiller-cluster-rule created

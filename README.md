@@ -128,7 +128,9 @@ Link to the docs: https://kubernetes.github.io/ingress-nginx/deploy/#using-helm
 
 ### Now we are installing the `helm` on Google Cloud Terminal
 soprajap@cloudshell:~ (multi-kubernetes-production)$ **curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3**
+
 soprajap@cloudshell:~ (multi-kubernetes-production)$ **chmod 700 get_helm.sh**
+
 soprajap@cloudshell:~ (multi-kubernetes-production)$ **./get_helm.sh**
 ```
 Helm v3.2.4 is available. Changing from version v3.2.1.
@@ -139,11 +141,13 @@ helm installed into /usr/local/bin/helm
 
 ### Get the namespaces on Google Cloud Terminal
 soprajap@cloudshell:~ (multi-kubernetes-production)$ **kubectl get namespaces**
+```
 NAME              STATUS   AGE
 default           Active   166m
 kube-node-lease   Active   166m
 kube-public       Active   166m
 kube-system       Active   166m
+```
 
 ### Create the service account for `tiller` under namespace `kube-system` on Google Cloud Terminal
 soprajap@cloudshell:~ (multi-kubernetes-production)$ **kubectl create serviceaccount --namespace kube-system tiller**
